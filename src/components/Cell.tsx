@@ -1,8 +1,14 @@
-import { winner, started } from "../store";
+import {
+  players,
+  setStarted,
+  started,
+  completedAnimations,
+  setCompletedAnimations,
+} from "../store";
 import "../styles/animation.css";
 
-export function Cell(props: { name: string; index: number }) {
-  const delay = 2 + 2 * props.index + "s";
+export function Cell(props: { name: string; index: number; winner: boolean }) {
+  const delay = 1 + 2 * props.index + "s";
 
   const randInt = (min: number, max: number) => Math.floor(randRange(min, max));
   const randRange = (min: number, max: number) =>
@@ -11,22 +17,30 @@ export function Cell(props: { name: string; index: number }) {
   const color = "#" + Math.floor(randRange(0.1, 0.9) * 16777215).toString(16);
 
   const cellStyle =
-    "flex justify-center items-center text-4xl h-40 overflow-hidden rounded-lg";
+    "flex justify-center items-center text-4xl h-40 overflow-hidden rounded-lg text-white ";
 
   const loseStyle = cellStyle;
   const winStyle = cellStyle;
 
   let anim = (win: boolean) => (win ? "winner" : "ciao");
+  let animDone = false;
 
   return (
     <div
+      onAnimationEnd={(e) => {
+        animDone = true;
+        setCompletedAnimations(completedAnimations() + 1);
+        if (completedAnimations() === players().length) {
+          setCompletedAnimations(0);
+        }
+      }}
       style={{
         "background-color": `${color}`,
-        "animation-name": "ciao",
+        "animation-name": `${anim(props.winner)}`,
         "animation-duration": "2s",
         "animation-delay": `${delay}`,
         "animation-fill-mode": "both",
-        "animation-play-state": started() ? "running" : "paused",
+        "animation-play-state": started() && !animDone ? "running" : "paused",
       }}
       class={cellStyle}
     >

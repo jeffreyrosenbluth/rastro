@@ -5,14 +5,16 @@ import { Table } from "../components/Table";
 ---
 
 <Layout title="Picker">
-  <main class="text-center mx-auto text-gray-700 p-4 flex-auto flex-col">
+  <main
+    class="text-center mx-auto text-gray-700 p-6 ml-6 mr-6 flex-auto flex-col"
+  >
     <h1 class="max-6-xs text-6xl text-sky-700 font-semi-bold uppercase my-16">
       Lottery
     </h1>
     <button
       id="play"
       type="button"
-      class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-6 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none"
+      class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-xl px-5 py-2.5 mr-2 mb-8 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none w-40"
     >
       Play
     </button>
@@ -26,7 +28,15 @@ import { Table } from "../components/Table";
 </Layout>
 
 <script>
-  import { setStarted } from "../store";
+  import { started, setStarted } from "../store";
+
   const button = document.getElementById("play");
-  button?.addEventListener("click", () => setStarted(true));
+  button?.addEventListener("click", () => {
+    if (started()) {
+      location.reload();
+    } else {
+      setStarted(true);
+      button.innerText = "Reset";
+    }
+  });
 </script>
