@@ -1,0 +1,48 @@
+@keyframes ciao {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: scale3d(0.475, 0.475, 0.475);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+}
+
+.animate_ciao {
+  animation-name: ciao;
+  transform-origin: center;
+}
+
+@keyframes winner {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  10%,
+  20% {
+    transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
+  }
+
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: scale3d(1.25, 1.25, 1.25) rotate3d(0, 0, 1, 3deg);
+  }
+
+  40%,
+  60%,
+  80% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+  }
+
+  to {
+    transform: translate3d(50px, 50px, 0) scale3d(1.5, 1.5, 1.5);
+  }
+}
+
+.animate_winner {
+  animation-name: winner;
+  transform-origin: center;
+}
