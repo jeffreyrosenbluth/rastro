@@ -17,7 +17,7 @@ export function Cell(props: { name: string; index: number; winner: boolean }) {
   const color = "#" + Math.floor(randRange(0.1, 0.9) * 16777215).toString(16);
 
   const cellStyle =
-    "flex justify-center items-center text-4xl h-40 overflow-hidden rounded-lg text-white ";
+    "flex justify-center items-center text-2xl lg:text-4xl h-20 lg:h-40 overflow-hidden rounded-lg text-white ";
 
   const loseStyle = cellStyle;
   const winStyle = cellStyle;

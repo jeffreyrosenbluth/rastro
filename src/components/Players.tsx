@@ -11,7 +11,7 @@ export function Players() {
         value={playersText()}
         cols="80"
         rows="5"
-        class="text-white bg-transparent border-2 border-gray-500 focus:outline-none  rounded p-1 m-8 mt-12"
+        class="text-lg text-white bg-transparent border-2 border-gray-500 focus:outline-none  rounded p-1 mx-8 my-12"
         onInput={(e) => {
           setPlayersText(e.currentTarget.value);
           if (localStorage) {
