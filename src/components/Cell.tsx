@@ -19,9 +19,6 @@ export function Cell(props: { name: string; index: number; winner: boolean }) {
   const cellStyle =
     "flex justify-center items-center text-2xl lg:text-4xl h-20 lg:h-40 overflow-hidden rounded-lg text-white ";
 
-  const loseStyle = cellStyle;
-  const winStyle = cellStyle;
-
   let anim = (win: boolean) => (win ? "winner" : "ciao");
   let animDone = false;
 
