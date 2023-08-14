@@ -1,13 +1,17 @@
-import {
-  players,
-  setStarted,
-  started,
-  completedAnimations,
-  setCompletedAnimations,
-} from "../store";
+import type { Accessor } from "solid-js";
 import "../styles/animation.css";
 
-export function Cell(props: { name: string; index: number; winner: boolean }) {
+type CellProps = {
+  name: string;
+  index: number;
+  winner: boolean;
+  numPlayers: number;
+  started: boolean;
+  completedAnimations: number;
+  setCompletedAnimations: (n: number) => void;
+};
+
+export function Cell(props: CellProps) {
   const delay = 1 + 2 * props.index + "s";
 
   const randInt = (min: number, max: number) => Math.floor(randRange(min, max));
@@ -26,9 +30,9 @@ export function Cell(props: { name: string; index: number; winner: boolean }) {
     <div
       onAnimationEnd={(e) => {
         animDone = true;
-        setCompletedAnimations(completedAnimations() + 1);
-        if (completedAnimations() === players().length) {
-          setCompletedAnimations(0);
+        props.setCompletedAnimations(props.completedAnimations + 1);
+        if (props.completedAnimations === props.numPlayers) {
+          props.setCompletedAnimations(0);
         }
       }}
       style={{
@@ -37,7 +41,8 @@ export function Cell(props: { name: string; index: number; winner: boolean }) {
         "animation-duration": "2s",
         "animation-delay": `${delay}`,
         "animation-fill-mode": "both",
-        "animation-play-state": started() && !animDone ? "running" : "paused",
+        "animation-play-state":
+          props.started && !animDone ? "running" : "paused",
       }}
       class={cellStyle}
     >
